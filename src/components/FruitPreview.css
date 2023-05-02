@@ -1,0 +1,11 @@
+.FruitPreview.citron {
+    background-color: yellow;
+}
+
+.FruitPreview.peche {
+    background-color: orangered;
+}
+
+.FruitPreview.fraise {
+    background-color: red;
+}
