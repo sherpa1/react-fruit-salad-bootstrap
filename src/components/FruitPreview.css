@@ -9,3 +9,86 @@
 .FruitPreview.fraise {
     background-color: red;
 }
+
+.FruitPreview.cassis {
+    background-color: purple;
+}
+
+.FruitPreview.banane {
+    background-color: yellow;
+}
+
+.FruitPreview.banane {
+    background-color: yellow;
+}
+
+.FruitPreview.ananas {
+    background-color: brown;
+}
+
+.FruitPreview.framboise {
+    background-color: purple;
+}
+
+.FruitPreview.goyave {
+    background-color: greenyellow;
+}
+
+.FruitPreview.grenade {
+    background-color: red;
+}
+
+.FruitPreview.kaki {
+    background-color: orange;
+}
+
+.FruitPreview.kiwi {
+    background-color: brown;
+}
+
+.FruitPreview.litchi {
+    background-color: red;
+}
+
+.FruitPreview.mangue {
+    background-color: lightgreen;
+}
+
+.FruitPreview.melon {
+    background-color: orange;
+}
+
+.FruitPreview.mure {
+    background-color: red;
+}
+
+.FruitPreview.pomme {
+    background-color: red;
+}
+
+.FruitPreview.myrtille {
+    background-color: purple;
+}
+
+.FruitPreview.mure {
+    background-color: red;
+}
+
+.FruitPreview.poire {
+    background-color: lime;
+}
+
+.FruitPreview.pomelo {
+    background-color: orange;
+}
+
+.FruitPreview.orange {
+    background-color: orange;
+}
+
+.FruitPreview img {
+    background-color: white;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 50%;
+}

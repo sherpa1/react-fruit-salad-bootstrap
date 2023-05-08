@@ -1,9 +1,8 @@
-import './App.css';
+import "./App.css";
 import FruitsMaster from "./components/FruitsMaster";
-import react, { useState } from "react";
+import { useState } from "react";
 
 function App() {
-
   const [displayList, setDisplayList] = useState(false);
   //par défaut displayList a la valeur false
   //donc on cache la liste
@@ -15,13 +14,12 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={()=>onClick()}>Afficher / Masquer</button>
-      
+      <button onClick={() => onClick()}>Afficher / Masquer</button>
+
       {/* {displayList && <FruitsMaster />}
       {!displayList && <p>Pas de fruit</p>} */}
 
-      {displayList ? <FruitsMaster/> : <p>Pas de fruit</p> }
-
+      {displayList === true && <FruitsMaster />}
     </div>
   );
 }
