@@ -11,7 +11,9 @@ function FruitPreview({ fruit }) {
 
   return (
     <div className={"FruitPreview " + fruit.name.toLowerCase()}>
-      <img width="100px" alt={fruit.name} src={getImage()} />
+      <a href={"/fruits/" + fruit.name.toLowerCase()} rel="">
+        <img width="100px" alt={fruit.name} src={getImage()} />
+      </a>
       <button onClick={() => onClick()}>{fruit.name}</button>
     </div>
   );

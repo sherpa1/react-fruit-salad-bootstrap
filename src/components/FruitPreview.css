@@ -23,11 +23,11 @@
 }
 
 .FruitPreview.ananas {
-    background-color: brown;
+    background-color: burlywood;
 }
 
 .FruitPreview.framboise {
-    background-color: purple;
+    background-color: blueviolet;
 }
 
 .FruitPreview.goyave {
@@ -75,11 +75,11 @@
 }
 
 .FruitPreview.poire {
-    background-color: lime;
+    background-color: lightgoldenrodyellow;
 }
 
 .FruitPreview.pomelo {
-    background-color: orange;
+    background-color: gold;
 }
 
 .FruitPreview.orange {
