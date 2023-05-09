@@ -45,16 +45,26 @@ function Signin() {
 
         aUser.id = decodedPayload.id;
 
-        setUser(aUser);
+        setLoading(true);
+        const response2 = await axiosInstance.get(`/users/${aUser.id}`, {
+          headers: { Authorization: `Bearer ${aUser.accessToken}` },
+        });
+        setLoading(false);
+
+        if (response2.status === 200) {
+          aUser.first_name = response2.data.data.first_name;
+          aUser.last_name = response2.data.data.last_name;
+          aUser.email = response2.data.data.email;
+          aUser.status = response2.data.data.status;
+
+          setError(false);
+          setUser(aUser);
+        } else {
+          setError(true);
+        }
+
+        reset();
       }
-
-      setLoading(false);
-      setError(false);
-      reset();
-
-      console.log(user);
-
-      return redirect("/fruits");
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -62,32 +72,43 @@ function Signin() {
     }
   }
 
+  function onSignOut() {
+    setUser(null);
+    return redirect("/connexion");
+  }
+
   return (
     <div className="Signup">
       {loading === false && error === false && user !== null && (
         <p>
-          Connexion au compte <b>{user.email}</b>
+          <b>
+            {user.first_name} {user.last_name}
+          </b>
+          &nbsp; ({user.email}) est connecté
+          <button onClick={() => onSignOut()}>Se déconnecter</button>
         </p>
       )}
       {loading === true && <p>Chargement...</p>}
       {error === true && <p>Une erreur s'est produite</p>}
-      <form onSubmit={handleSubmit(onSubmitSignInForm)}>
-        <input
-          placeholder="Adresse mail"
-          type="email"
-          {...register("email", { required: true })}
-        />
-        {errors.email && <span>Ce champ est obligatoire</span>}
+      {user === null && (
+        <form onSubmit={handleSubmit(onSubmitSignInForm)}>
+          <input
+            placeholder="Adresse mail"
+            type="email"
+            {...register("email", { required: true })}
+          />
+          {errors.email && <span>Ce champ est obligatoire</span>}
 
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          {...register("password", { required: true })}
-        />
-        {errors.password && <span>Ce champ est obligatoire</span>}
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            {...register("password", { required: true })}
+          />
+          {errors.password && <span>Ce champ est obligatoire</span>}
 
-        <button type="submit">Connexion</button>
-      </form>
+          <button type="submit">Connexion</button>
+        </form>
+      )}
     </div>
   );
 }
