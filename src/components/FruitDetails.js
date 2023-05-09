@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Fruit from "../models/Fruit";
-import { json, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./FruitDetails.css";
 
 import axios from "axios";
 
-const axiosIntance = axios.create({
+const axiosInstance = axios.create({
   baseURL: "https://fruits.shrp.dev",
   timeout: 1000,
   headers: {},
@@ -13,6 +13,7 @@ const axiosIntance = axios.create({
 
 function FruitDetails() {
   const { fruitName } = useParams();
+  //récupère la valeur du nom du fruit en minuscules dans l'URI ex: fruits/:fruitName -> fruits/cerise
 
   const [fruit, setFruit] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,10 +22,13 @@ function FruitDetails() {
   useEffect(() => {
     async function fetchAPI() {
       try {
-        setLoading(true);
         const nameWithFirstLetterUppercase =
           fruitName.charAt(0).toUpperCase() + fruitName.slice(1);
-        const response = await axiosIntance.get(
+        //fruitName = pomme -> nameWithFirstLetterUppercase = Pomme
+
+        setLoading(true);
+
+        const response = await axiosInstance.get(
           `/items/fruits?fields=*.*&filter[name][_eq]=${nameWithFirstLetterUppercase}`
         );
         const jsonData = response.data.data[0];
