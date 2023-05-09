@@ -1,6 +1,7 @@
+import "./Signin.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import "./Signup.css";
+import jwtdecode from "jwt-decode";
 
 import User from "../models/User";
 
@@ -12,7 +13,7 @@ const axiosInstance = axios.create({
   headers: {},
 });
 
-function Signup() {
+function Signin() {
   const {
     reset,
     register,
@@ -23,21 +24,15 @@ function Signup() {
   const [error, setError] = useState(false);
   const [user, setUser] = useState(null);
 
-  async function onSubmitSignUpForm(data) {
-    const aUser = new User(
-      data.firstname,
-      data.lastname,
-      data.email,
-      data.password
-    );
-
+  async function onSubmitSignInForm(data) {
     try {
       setLoading(true);
-      const response = await axiosInstance.post(`/users`, aUser);
+      const response = await axiosInstance.post(`/auth/login`, {
+        email: data.email,
+        password: data.password,
+      });
 
-      if (response.status === 204) {
-        setUser(aUser);
-      }
+      console.log(response.data);
 
       setLoading(false);
       setError(false);
@@ -59,19 +54,7 @@ function Signup() {
       )}
       {loading === true && <p>Chargement...</p>}
       {error === true && <p>Une erreur s'est produite</p>}
-      <form onSubmit={handleSubmit(onSubmitSignUpForm)}>
-        <input
-          placeholder="Prénom"
-          {...register("firstname", { required: true })}
-        />
-        {errors.firstname && <span>Ce champ est obligatoire</span>}
-
-        <input
-          placeholder="Nom"
-          {...register("lastname", { required: true })}
-        />
-        {errors.lastname && <span>Ce champ est obligatoire</span>}
-
+      <form onSubmit={handleSubmit(onSubmitSignInForm)}>
         <input
           placeholder="Adresse mail"
           {...register("email", { required: true })}
@@ -91,4 +74,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Signin;
