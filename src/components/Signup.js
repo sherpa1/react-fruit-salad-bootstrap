@@ -64,7 +64,7 @@ function Signup() {
           placeholder="Prénom"
           {...register("firstname", { required: true })}
         />
-        {errors.keyword && <span>Ce champ est obligatoire</span>}
+        {errors.firstname && <span>Ce champ est obligatoire</span>}
 
         <input
           placeholder="Nom"
