@@ -21,7 +21,7 @@ function FruitsMaster() {
   const [needToReload, setNeedToReload] = useState(false);
 
   function onLoadData() {
-    setNeedToReload(true); //déclenche l'exécution de useEffect
+    setNeedToReload(needToReload ? false : true); //déclenche l'exécution de useEffect
   }
 
   useEffect(() => {

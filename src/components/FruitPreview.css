@@ -91,4 +91,9 @@
     padding: 1em;
     margin: 1em;
     border-radius: 50%;
+    width: 50px;
+}
+
+.FruitPreview {
+    margin: 1em;
 }

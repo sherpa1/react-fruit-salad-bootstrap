@@ -4,6 +4,6 @@
 
 .FruitsMaster div.FruitsContainer {
     border-radius: 1em;
-    border: 5px solid black;
+    border: 2px solid lightgray;
     padding: 0.5em;
 }
