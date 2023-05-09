@@ -25,8 +25,8 @@ function Signup() {
 
   async function onSubmitSignUpForm(data) {
     const aUser = new User(
-      data.firstname,
-      data.lastname,
+      data.first_name,
+      data.last_name,
       data.email,
       data.password
     );
@@ -53,7 +53,7 @@ function Signup() {
     <div className="Signup">
       {loading === false && error === false && user !== null && (
         <p>
-          Compte créé pour <b>{`${user.firstname} ${user.lastname}`}</b> (
+          Compte créé pour <b>{`${user.first_name} ${user.last_name}`}</b> (
           {user.email})
         </p>
       )}
@@ -62,15 +62,15 @@ function Signup() {
       <form onSubmit={handleSubmit(onSubmitSignUpForm)}>
         <input
           placeholder="Prénom"
-          {...register("firstname", { required: true })}
+          {...register("first_name", { required: true })}
         />
-        {errors.firstname && <span>Ce champ est obligatoire</span>}
+        {errors.first_name && <span>Ce champ est obligatoire</span>}
 
         <input
           placeholder="Nom"
-          {...register("lastname", { required: true })}
+          {...register("last_name", { required: true })}
         />
-        {errors.lastname && <span>Ce champ est obligatoire</span>}
+        {errors.last_name && <span>Ce champ est obligatoire</span>}
 
         <input
           placeholder="Adresse mail"
