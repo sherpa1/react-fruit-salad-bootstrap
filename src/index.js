@@ -9,11 +9,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import FruitsMaster from "./components/FruitsMaster";
 import ErrorPage from "./components/ErrorPage";
 import FruitDetails from "./components/FruitDetails";
+import Signup from "./components/Signup";
 
 const router = createBrowserRouter([
   {
     path: "/fruits/:fruitName",
     element: <FruitDetails />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/creation-de-compte",
+    element: <Signup />,
     errorElement: <ErrorPage />,
   },
   {

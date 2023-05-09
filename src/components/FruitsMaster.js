@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 // import fruits from '../data/fruits';
 import { v4 as uuid } from "uuid";
 import FruitPreview from "./FruitPreview";
 import Fruit from "../models/Fruit";
-import { useForm } from "react-hook-form";
 
 import "./FruitsMaster.css";
 
@@ -25,7 +25,6 @@ function FruitsMaster() {
     reset,
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
