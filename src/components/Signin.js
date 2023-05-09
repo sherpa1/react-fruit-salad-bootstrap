@@ -21,6 +21,7 @@ function Signin() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [user, setUser] = useState(null);
@@ -35,6 +36,7 @@ function Signin() {
 
       if (response.status === 200) {
         const aUser = new User(null, null, data.email);
+
         aUser.accessToken = response.data.data.access_token;
         aUser.refreshToken = response.data.data.refresh_token;
         aUser.expires = response.data.data.expires;
@@ -72,6 +74,7 @@ function Signin() {
       <form onSubmit={handleSubmit(onSubmitSignInForm)}>
         <input
           placeholder="Adresse mail"
+          type="email"
           {...register("email", { required: true })}
         />
         {errors.email && <span>Ce champ est obligatoire</span>}

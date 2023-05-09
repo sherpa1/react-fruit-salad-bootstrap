@@ -8,6 +8,7 @@ class User {
     this.password = password;
     this.id = id;
     this.role = User.CUSTOMER_ROLE_ID; //customer role
+
     this.accessToken = null;
     this.refreshToken = null;
     this.expires = null;
