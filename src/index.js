@@ -10,6 +10,7 @@ import FruitsMaster from "./components/FruitsMaster";
 import ErrorPage from "./components/ErrorPage";
 import FruitDetails from "./components/FruitDetails";
 import Signup from "./components/Signup";
+import Signin from "./components/Signin";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
   {
     path: "/creation-de-compte",
     element: <Signup />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/connexion",
+    element: <Signin />,
     errorElement: <ErrorPage />,
   },
   {

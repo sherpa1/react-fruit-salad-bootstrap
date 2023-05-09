@@ -1,7 +1,8 @@
 import "./Signin.css";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import jwtdecode from "jwt-decode";
+import jwt_decode from "jwt-decode";
+import { redirect } from "react-router-dom";
 
 import User from "../models/User";
 
@@ -32,11 +33,26 @@ function Signin() {
         password: data.password,
       });
 
-      console.log(response.data);
+      if (response.status === 200) {
+        const aUser = new User(null, null, data.email);
+        aUser.accessToken = response.data.data.access_token;
+        aUser.refreshToken = response.data.data.refresh_token;
+        aUser.expires = response.data.data.expires;
+
+        const decodedPayload = jwt_decode(aUser.accessToken);
+
+        aUser.id = decodedPayload.id;
+
+        setUser(aUser);
+      }
 
       setLoading(false);
       setError(false);
       reset();
+
+      console.log(user);
+
+      return redirect("/fruits");
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -48,8 +64,7 @@ function Signin() {
     <div className="Signup">
       {loading === false && error === false && user !== null && (
         <p>
-          Compte créé pour <b>{`${user.firstname} ${user.lastname}`}</b> (
-          {user.email})
+          Connexion au compte <b>{user.email}</b>
         </p>
       )}
       {loading === true && <p>Chargement...</p>}
@@ -68,7 +83,7 @@ function Signin() {
         />
         {errors.password && <span>Ce champ est obligatoire</span>}
 
-        <button type="submit">Création de compte</button>
+        <button type="submit">Connexion</button>
       </form>
     </div>
   );
