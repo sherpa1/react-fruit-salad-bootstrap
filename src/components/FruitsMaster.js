@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import FruitPreview from "./FruitPreview";
 import Fruit from "../models/Fruit";
+import { useForm } from "react-hook-form";
 
 import "./FruitsMaster.css";
 
@@ -20,7 +21,36 @@ function FruitsMaster() {
   const [error, setError] = useState(false);
   const [needToReload, setNeedToReload] = useState(false);
 
-  function onLoadData() {
+  const {
+    reset,
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  async function onSubmitSearchForm(data) {
+    const keyword = data.keyword;
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get(
+        `/items/fruits?search=${keyword}`
+      );
+      const collectionOfFruitItems = response.data.data.map(
+        (jsonItem) => new Fruit(jsonItem.name, jsonItem.color, jsonItem.image)
+      );
+      setFruits(collectionOfFruitItems);
+      setLoading(false);
+      setError(false);
+      reset();
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      setError(true);
+    }
+  }
+
+  function onReloadData() {
     setNeedToReload(needToReload ? false : true); //déclenche l'exécution de useEffect
   }
 
@@ -49,7 +79,18 @@ function FruitsMaster() {
 
   return (
     <div className="FruitsMaster">
-      <button onClick={() => onLoadData()}>Recharger les données</button>
+      <button onClick={() => onReloadData()}>Recharger les données</button>
+
+      <form onSubmit={handleSubmit(onSubmitSearchForm)}>
+        <input
+          placeholder="Mot clé"
+          {...register("keyword", { required: true })}
+        />
+        {errors.keyword && <span>Ce champ est obligatoire</span>}
+
+        <input type="submit" value="Recherche" />
+      </form>
+
       {loading === true && <p>Chargement...</p>}
       {error === true && <p>Une erreur s'est produite</p>}
       <div className="FruitsContainer">
