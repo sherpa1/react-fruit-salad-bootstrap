@@ -74,6 +74,7 @@ function Signup() {
 
         <input
           placeholder="Adresse mail"
+          type="email"
           {...register("email", { required: true })}
         />
         {errors.email && <span>Ce champ est obligatoire</span>}
